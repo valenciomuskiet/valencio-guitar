@@ -1,113 +1,113 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, Youtube, Instagram,  } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, Home } from "lucide-react";
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const links = [
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
+    { name: "Updates", href: "/updates" },
+  ];
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-black/80 to-transparent backdrop-blur-md text-white">
-      <div className="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
-        {/* Logo */}
-        <a href="/" className="text-2xl font-bold tracking-widest">
-          VALENCIO
+    <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-black/60 border-b border-white/10">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-5">
+
+        {/* === Home Button === */}
+        <a
+          href="/"
+          aria-label="Home"
+          className="p-3 rounded-md border border-transparent hover:border-white hover:bg-white hover:text-black transition-all duration-300"
+        >
+          <Home size={28} />
         </a>
 
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex items-center space-x-8 text-sm uppercase tracking-wide">
-          <a href="/" className="hover:text-gray-300 transition">
-            Home
-          </a>
-          <a href="/about" className="hover:text-gray-300 transition">
-            About
-          </a>
-          <a href="/tabs" className="hover:text-gray-300 transition">
-            Tabs
-          </a>
-          <a href="/contact" className="hover:text-gray-300 transition">
-            Contact
-          </a>
+        {/* === Desktop Links === */}
+        <div className="hidden lg:flex gap-10 text-white text-lg font-medium uppercase tracking-wide">
+          {links.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="hover:bg-white hover:text-black px-5 py-2 rounded-md transition-all duration-300"
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
 
-          {/* Social Icons */}
-          <div className="flex items-center space-x-4 ml-4">
-            <a
-              href="https://www.youtube.com/@ValencioGuitar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-red-500 transition"
-            >
-              <Youtube size={20} />
-            </a>
-            <a
-              href="https://www.instagram.com/valencio.guitar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-pink-500 transition"
-            >
-              <Instagram size={20} />
-            </a>
-            <a
-              href="https://open.spotify.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-green-500 transition"
-            >
-              
-            </a>
-          </div>
-        </nav>
-
-        {/* Mobile Hamburger */}
-        <button
-          className="md:hidden"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        {/* === Animated Burger / Close Button (Mobile Only) === */}
+        <div className="lg:hidden">
+          <motion.button
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle Menu"
+            className="relative text-white p-3 rounded-md border border-transparent hover:border-white hover:bg-white hover:text-black transition-all duration-300"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {isOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                >
+                  <X size={28} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ opacity: 0, rotate: 90, scale: 0.8 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={{ opacity: 0, rotate: -90, scale: 0.8 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                >
+                  <Menu size={28} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
+        </div>
       </div>
 
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-black/90 border-t border-gray-800 flex flex-col items-center space-y-4 py-6 text-lg">
-          <a href="/" onClick={() => setMenuOpen(false)}>
-            Home
-          </a>
-          <a href="/about" onClick={() => setMenuOpen(false)}>
-            About
-          </a>
-          <a href="/tabs" onClick={() => setMenuOpen(false)}>
-            Tabs
-          </a>
-          <a href="/contact" onClick={() => setMenuOpen(false)}>
-            Contact
-          </a>
-          <div className="flex space-x-4 pt-4">
-            <a
-              href="https://www.youtube.com/@ValencioGuitar"
-              target="_blank"
-              className="hover:text-red-500"
-            >
-              <Youtube size={22} />
-            </a>
-            <a
-              href="https://www.instagram.com/valencio.guitar"
-              target="_blank"
-              className="hover:text-pink-500"
-            >
-              <Instagram size={22} />
-            </a>
-            <a
-              href="https://open.spotify.com/"
-              target="_blank"
-              className="hover:text-green-500"
-            >
-              
-            </a>
-          </div>
-        </div>
-      )}
-    </header>
+      {/* === Mobile Menu === */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="absolute top-full left-0 w-full bg-black/95 text-center py-10 border-t border-white/10 lg:hidden"
+          >
+            {/* Mobile Links */}
+            <div className="flex flex-col items-center gap-8 text-xl font-medium uppercase tracking-wide">
+              {links.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="hover:bg-white hover:text-black px-6 py-3 rounded-md transition-all duration-300"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+
+            {/* Divider Line */}
+            <motion.div
+              className="my-8 h-px w-2/3 bg-white/10 mx-auto"
+              initial={{ opacity: 0, width: "0%" }}
+              animate={{ opacity: 1, width: "66%" }}
+              exit={{ opacity: 0, width: "0%" }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 }

@@ -1,67 +1,119 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { FaYoutube, FaInstagram, FaTiktok } from "react-icons/fa";
 
 export default function Home() {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 400], [0, 120]);
+
   return (
-    <main className="relative min-h-screen w-full flex flex-col justify-center items-center bg-black text-white overflow-hidden">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
+    <main className="relative min-h-screen flex flex-col items-center justify-center text-center text-white overflow-hidden">
+
+      {/* === Background Image === */}
+      <motion.div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url('/valencio-hero.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: "brightness(65%) contrast(1.05)",
+          y,
         }}
       />
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-amber-900/40 via-black/70 to-black/90"></div>
+      {/* === Gradient Overlay === */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
 
-      {/* Hero content */}
-      <section className="relative z-10 flex flex-col items-center text-center px-6">
+      {/* === Hero Content === */}
+      <section className="relative z-10 px-6 w-full flex flex-col items-center justify-center">
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          className="text-[3.2rem] sm:text-[5rem] md:text-[6.5rem] lg:text-[7.5rem] font-extrabold tracking-[0.05em] leading-[1.05] mb-3 sm:mb-5 uppercase"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-6xl md:text-8xl font-extrabold tracking-tight mb-4"
+          transition={{ duration: 0.9, ease: "easeOut" }}
         >
           VALENCIO SAEZ
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 40 }}
+          className="text-base sm:text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl"
+          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
         >
-          Unlock Fingerstyle Guitar Across All Music
+          Fingerstyle Guitar Across All Music Genres
         </motion.p>
 
-        <div className="flex flex-wrap gap-4 justify-center">
-          <a
-            href="https://www.youtube.com/@ValencioGuitar"
-            target="_blank"
-            className="border border-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-white hover:text-black transition"
-          >
-            Watch Video
-          </a>
+        {/* === Main Buttons === */}
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.1, delay: 0.4, ease: "easeOut" }}
+        >
+          {/* Guitar Tabs */}
           <a
             href="/tabs"
-            className="bg-white text-black px-8 py-3 rounded-md text-lg font-semibold hover:bg-gray-200 transition"
+            className="w-full sm:w-auto bg-white text-black font-semibold px-8 py-4 rounded-xl text-lg hover:bg-gray-200 transition-all duration-300 hover:scale-105"
           >
             Guitar Tabs
           </a>
-        </div>
+
+          {/* Latest Work (YouTube Short) */}
+          <a
+            href="https://www.youtube.com/shorts/Fw6PSR004Ds"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto border border-white text-white font-semibold px-8 py-4 rounded-xl text-lg hover:bg-white hover:text-black transition-all duration-300 hover:scale-105"
+          >
+            Latest Work
+          </a>
+        </motion.div>
+
+        {/* === Social Icons === */}
+        <motion.div
+          className="flex gap-6 justify-center items-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
+        >
+          <a
+            href="https://youtube.com/@ValencioGuitar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-4 rounded-full border border-white/70 hover:bg-white hover:text-black transition-all duration-300 hover:scale-110"
+            title="YouTube"
+          >
+            <FaYoutube className="w-7 h-7" />
+          </a>
+
+          <a
+            href="https://instagram.com/valencioguitar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-4 rounded-full border border-white/70 hover:bg-white hover:text-black transition-all duration-300 hover:scale-110"
+            title="Instagram"
+          >
+            <FaInstagram className="w-7 h-7" />
+          </a>
+
+          <a
+            href="https://tiktok.com/@valencioguitar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-4 rounded-full border border-white/70 hover:bg-white hover:text-black transition-all duration-300 hover:scale-110"
+            title="TikTok"
+          >
+            <FaTiktok className="w-7 h-7" />
+          </a>
+        </motion.div>
       </section>
 
-      {/* Scroll cue */}
-      <div className="absolute bottom-10 text-gray-400 animate-bounce text-sm tracking-wider">
+      {/* === Scroll Indicator === */}
+      <p className="absolute bottom-6 text-gray-400 text-sm tracking-wide">
         ↓ SCROLL
-      </div>
-
-      {/* Footer */}
-      <footer className="absolute bottom-4 text-gray-500 text-sm">
-        © {new Date().getFullYear()} Valencio Saez — All rights reserved.
-      </footer>
+      </p>
     </main>
   );
 }
