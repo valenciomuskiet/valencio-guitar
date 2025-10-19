@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 export default function UpcomingPage() {
@@ -19,16 +20,16 @@ export default function UpcomingPage() {
           Coming Soon
         </h1>
         <p className="text-gray-400 text-lg md:text-xl max-w-md">
-          This page is currently under construction.  
+          This page is currently under construction.
         </p>
 
-        {/* Optional back to home button */}
-        <a
+        {/* ✅ Fixed Link */}
+        <Link
           href="/"
           className="mt-8 border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-black transition duration-300"
         >
           Return Home
-        </a>
+        </Link>
       </motion.div>
     </main>
   );

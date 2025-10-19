@@ -4,9 +4,14 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   typedRoutes: true,
 
-  // Completely disable LightningCSS (use PostCSS instead)
+  // Disable lightningcss completely on Vercel
+  compiler: {
+    // @ts-ignore – undocumented flag
+    lightningcss: false,
+  },
+
   experimental: {
-    optimizeCss: false,
+    optimizeCss: false, // fall back to PostCSS
   },
 };
 
