@@ -1,17 +1,13 @@
-// next.config.ts
 import type { NextConfig } from "next";
 
-// Use type casting to safely extend config options
-const nextConfig = {
-  compiler: {
-    // Disable LightningCSS to fix Vercel build errors
-    lightningcss: false,
-  },
-  experimental: {
-    typedRoutes: true,
-  },
+const nextConfig: NextConfig = {
   reactStrictMode: true,
-} satisfies NextConfig;
+  typedRoutes: true,
 
-// Export as default
+  // Completely disable LightningCSS (use PostCSS instead)
+  experimental: {
+    optimizeCss: false,
+  },
+};
+
 export default nextConfig;
