@@ -1,10 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   experimental: {
+    // Keep appDir enabled if you're using the /app folder
     appDir: true,
   },
-  output: 'standalone',
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
+  // 👇 This line fixes the Vercel build issue
+  optimizeCss: false,
 };
 
 module.exports = nextConfig;
