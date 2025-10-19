@@ -112,7 +112,6 @@ export default function Home() {
 
       {/* === Scroll Indicator === */}
       <p className="absolute bottom-6 text-gray-400 text-sm tracking-wide">
-        ↓ SCROLL
       </p>
     </main>
   );
