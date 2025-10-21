@@ -21,7 +21,7 @@ const tabs: Tab[] = [
     price: "€2.60",
     oldPrice: "€4,00",
     image: "/tabs/tab1.jpg",
-    videoId: "lB5ptkpGdWc",
+    videoId: "lB5ptkpGdWc", // Replace with your YouTube video ID
     kofiUrl: "https://www.mymusicfive.com/valenciosaez/324313",
   },
 ];
@@ -47,52 +47,45 @@ export default function TabsPage() {
   );
 }
 
-// TabCard component with TypeScript props
+// === Tab Card Component ===
 function TabCard({ tab }: { tab: Tab }) {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: tab.id * 0.1 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       className="relative bg-zinc-900 p-5 rounded-xl shadow-lg text-center overflow-hidden hover:scale-105 transition-transform duration-300"
     >
-      {/* Video Section */}
-      <div className="relative w-full h-64 mb-4 rounded-lg overflow-hidden cursor-pointer">
-        {!isPlaying ? (
-          <>
-            <img
-              src={tab.image}
-              alt={tab.title}
-              className="w-full h-full object-cover rounded-lg"
-              onClick={() => setIsPlaying(true)}
-            />
-            <div
-              className="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold bg-black bg-opacity-30 rounded-lg"
-              onClick={() => setIsPlaying(true)}
-            >
-              ▶
-            </div>
-          </>
-        ) : (
-          <iframe
-            className="w-full h-full rounded-lg"
-            src={`https://www.youtube.com/embed/${tab.videoId}?autoplay=1&mute=0`}
-            title={`${tab.title} demo`}
-            allow="autoplay; encrypted-media"
-          />
-        )}
+      {/* === YouTube Preview / Video === */}
+      <div className="relative w-full h-64 mb-4 rounded-lg overflow-hidden">
+        <iframe
+          className="w-full h-full rounded-lg"
+          src={`https://www.youtube-nocookie.com/embed/${tab.videoId}?autoplay=${
+            isHovered ? 1 : 0
+          }&mute=1&controls=0&loop=1&playlist=${tab.videoId}&playsinline=1`}
+          title={`${tab.title} demo`}
+          loading="lazy"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          style={{
+            backgroundImage: `url(https://img.youtube.com/vi/${tab.videoId}/hqdefault.jpg)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
       </div>
 
-      {/* Info */}
+      {/* === Info Section === */}
       <h3 className="text-2xl font-bold mb-1">{tab.title}</h3>
       <div className="flex justify-center items-center gap-2 mb-3">
         <p className="text-gray-500 line-through">{tab.oldPrice}</p>
         <p className="text-lg font-semibold text-white">{tab.price}</p>
       </div>
 
-      {/* Animated Buy Button with wiggle using tween */}
+      {/* === Buy Button === */}
       <motion.a
         href={tab.kofiUrl}
         target="_blank"
@@ -100,7 +93,7 @@ function TabCard({ tab }: { tab: Tab }) {
         className="inline-block bg-white text-black px-6 py-3 rounded-md font-medium"
         whileHover={{
           scale: 1.15,
-          rotate: [0, 10, -10, 0], // wiggle/spin animation
+          rotate: [0, 10, -10, 0],
           backgroundColor: "#000",
           color: "#fff",
         }}

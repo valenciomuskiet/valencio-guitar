@@ -89,7 +89,7 @@ export default function Home() {
           </a>
 
           <a
-            href="https://instagram.com/valencioguitar"
+            href="https://instagram.com/valencio.saez"
             target="_blank"
             rel="noopener noreferrer"
             className="p-4 rounded-full border border-white/70 hover:bg-white hover:text-black transition-all duration-300 hover:scale-110"
@@ -99,7 +99,7 @@ export default function Home() {
           </a>
 
           <a
-            href="https://tiktok.com/@valencioguitar"
+            href="https://www.tiktok.com/@valencio.saez"
             target="_blank"
             rel="noopener noreferrer"
             className="p-4 rounded-full border border-white/70 hover:bg-white hover:text-black transition-all duration-300 hover:scale-110"
