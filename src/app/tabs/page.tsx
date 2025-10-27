@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 type Tab = {
   id: number;
   title: string;
@@ -12,13 +14,12 @@ type Tab = {
 const TABS: Tab[] = [
   {
     id: 1,
-    title: "Messy - Lola Young",
+    title: "Messy - Lola Young \n",
     price: "€2.60",
     oldPrice: "€4,00",
     videoId: "lB5ptkpGdWc",
     kofiUrl: "https://www.mymusicfive.com/valenciosaez/324313",
   },
-
   {
     id: 2,
     title: "The Elder Scrolls IV: Oblivion Main Theme",
@@ -27,7 +28,14 @@ const TABS: Tab[] = [
     videoId: "k5gyiUf_kNI",
     kofiUrl: "https://www.mymusicfive.com/valenciosaez/325376",
   },
-  // ✅ just add more objects here
+  {
+    id: 3,
+    title: "Anxiety x Somebody that I Used to Know (riff)",
+    price: "FREE",
+    oldPrice: "",
+    videoId: "oQUnNgwbEXY",
+    kofiUrl: "",
+  },
 ];
 
 export default function TabsPage() {
@@ -45,6 +53,8 @@ export default function TabsPage() {
 }
 
 function VideoCard({ tab }: { tab: Tab }) {
+  const isFree = tab.price === "FREE";
+
   return (
     <div className="bg-zinc-900 p-5 rounded-xl shadow-lg text-center">
       <div className="relative w-full h-64 mb-4 rounded-lg overflow-hidden">
@@ -54,22 +64,40 @@ function VideoCard({ tab }: { tab: Tab }) {
           title={`${tab.title} demo`}
           allow="autoplay; encrypted-media; picture-in-picture"
         ></iframe>
+
+        {isFree && (
+          <div className="absolute top-2 right-2 text-white text-xs font-bold px-2 py-1 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm">
+            FREE
+          </div>
+        )}
       </div>
 
       <h3 className="text-2xl font-bold mb-1">{tab.title}</h3>
+
       <div className="flex justify-center items-center gap-2 mb-3">
-        <p className="text-gray-500 line-through">{tab.oldPrice}</p>
+        {tab.oldPrice && (
+          <p className="text-gray-500 line-through">{tab.oldPrice}</p>
+        )}
         <p className="text-lg font-semibold text-white">{tab.price}</p>
       </div>
 
-      <a
-        href={tab.kofiUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block bg-white text-black px-6 py-3 rounded-md font-medium"
-      >
-        Buy Here
-      </a>
+      {isFree ? (
+        <Link
+          href={{ pathname: "/free/anxiety" }}
+          className="inline-block bg-white text-black px-6 py-3 rounded-md font-semibold hover:bg-gray-200 transition"
+        >
+          View Free Tab
+        </Link>
+      ) : (
+        <a
+          href={tab.kofiUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block bg-white text-black px-6 py-3 rounded-md font-medium hover:bg-gray-200 transition"
+        >
+          Get Here
+        </a>
+      )}
     </div>
   );
 }
