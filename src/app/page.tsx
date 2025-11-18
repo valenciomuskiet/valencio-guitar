@@ -42,7 +42,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
         >
-          Fingerstyle Guitar Across All Music Genres
+          Fingerstyle Guitar
         </motion.p>
 
         {/* === Main Buttons === */}
@@ -62,7 +62,7 @@ export default function Home() {
 
           {/* Latest Work (YouTube Short) */}
           <a
-            href="https://www.youtube.com/shorts/Fw6PSR004Ds"
+            href="https://www.youtube.com/shorts/oZHkuWwTXoQ"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto border border-white text-white font-semibold px-8 py-4 rounded-xl text-lg hover:bg-white hover:text-black transition-all duration-300 hover:scale-105"

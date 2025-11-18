@@ -14,6 +14,14 @@ type Tab = {
 const TABS: Tab[] = [
   {
     id: 1,
+    title: "back to friends - sombr \n",
+    price: "€2.60",
+    oldPrice: "€4,00",
+    videoId: "oZHkuWwTXoQ",
+    kofiUrl: "https://www.mymusicfive.com/valenciosaez/333525",
+  },
+  {
+    id: 2,
     title: "Messy - Lola Young \n",
     price: "€2.60",
     oldPrice: "€4,00",
@@ -21,7 +29,7 @@ const TABS: Tab[] = [
     kofiUrl: "https://www.mymusicfive.com/valenciosaez/324313",
   },
   {
-    id: 2,
+    id: 3,
     title: "The Elder Scrolls IV: Oblivion Main Theme",
     price: "€2.60",
     oldPrice: "€4,00",
@@ -29,7 +37,7 @@ const TABS: Tab[] = [
     kofiUrl: "https://www.mymusicfive.com/valenciosaez/325376",
   },
   {
-    id: 3,
+    id: 4,
     title: "Anxiety x Somebody that I Used to Know (riff)",
     price: "FREE",
     oldPrice: "",
