@@ -27,7 +27,9 @@ const TABS: Tab[] = [
     oldPrice: "€4,00",
     videoId: "lB5ptkpGdWc",
     kofiUrl: "https://www.mymusicfive.com/valenciosaez/324313",
-  },
+  }
+  /*
+
   {
     id: 3,
     title: "The Elder Scrolls IV: Oblivion Main Theme",
@@ -44,6 +46,8 @@ const TABS: Tab[] = [
     videoId: "oQUnNgwbEXY",
     kofiUrl: "",
   },
+;
+*/
 ];
 
 export default function TabsPage() {
