@@ -51,7 +51,7 @@ const TABS: Tab[] = [
 export default function TabsPage() {
   return (
     <main className="min-h-screen bg-black text-white flex flex-col items-center py-24 px-6">
-      <h1 className="text-5xl font-bold mb-12 uppercase">Tabs & Bund</h1>
+      <h1 className="text-5xl font-bold mb-12 uppercase">Tabs & Bundles</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl w-full">
         {TABS.map((tab) => (
